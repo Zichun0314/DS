@@ -18,9 +18,13 @@ test_data$DEATH_EVENT = as.factor(test_data$DEATH_EVENT)
 # Modelling on the training set (Random forest) ----
 #===============================================================================
 
+## fit the model
 set.seed(123)
 model_rf = randomForest(DEATH_EVENT ~ ., train_data, ntree = 500,  importance = TRUE)
 print(model_rf)
+
+## variable importance plot
+varImpPlot(model_rf, n.var = nrow(model_rf$importance), main = 'Variable importance')
 
 #=============================================================================== 
 # Make prediction on the test set ----
